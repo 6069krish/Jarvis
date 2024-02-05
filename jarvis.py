@@ -5,7 +5,6 @@ import webbrowser
 import wolframalpha
 import datetime 
 import os
-import datetime
 import wikipedia
 import pyautogui
 import winsound
@@ -67,7 +66,7 @@ def jokes():
 def wolfrmalpha(): 
     try: 
 
-        client = wolframalpha.Client("7G6TQL-KK3HPEY2UA")
+        client = wolframalpha.Client("your_app_id")
         res = client.query(query)
         output = next(res.results).text
         print(output)
