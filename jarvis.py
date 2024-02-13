@@ -67,7 +67,7 @@ def jokes():
 def wolfrmalpha(): 
     try: 
 
-        client = wolframalpha.Client("7G6TQL-KK3HPEY2UA")
+        client = wolframalpha.Client("your_client_id")
         res = client.query(query)
         output = next(res.results).text
         print(output)
