@@ -5,20 +5,14 @@ import webbrowser
 import wolframalpha
 import datetime 
 import os
-<<<<<<< HEAD
-=======
 import datetime
->>>>>>> 674dc6cc10368069ef0c321ea9c1fe8afb2d27f3
 import wikipedia
 import pyautogui
 import winsound
 import pyjokes
-<<<<<<< HEAD
 import subprocess
 # chatbot_script = 'chatbot.py'
-from chatbot import *
-=======
->>>>>>> 674dc6cc10368069ef0c321ea9c1fe8afb2d27f3
+from conversation.chatbot import *
 
 input('')
 def takeCommand():
@@ -54,15 +48,12 @@ def speak(audio):
     engine.say(audio) 
     engine.runAndWait()
 
-<<<<<<< HEAD
 # def handle_query_with_chatbot(user_query):
 #     # Call the chatbot script and pass the user query as an argument
 #     result = subprocess.run(['python', chatbot_script, user_query], capture_output=True, text=True)
 #     # Return the chatbot's response
 #     return result.stdout.strip()
-=======
 
->>>>>>> 674dc6cc10368069ef0c321ea9c1fe8afb2d27f3
 
 def wiki():
     try:
@@ -84,11 +75,7 @@ def jokes():
 def wolfrmalpha(): 
     try: 
 
-<<<<<<< HEAD
-        client = wolframalpha.Client("7G6TQL-KK3HPEY2UA")
-=======
         client = wolframalpha.Client("your_client_id")
->>>>>>> 674dc6cc10368069ef0c321ea9c1fe8afb2d27f3
         res = client.query(query)
         output = next(res.results).text
         print(output)
@@ -116,7 +103,6 @@ def web():
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
         
         
         while True:
@@ -141,17 +127,6 @@ if __name__ == "__main__":
 
             # except:
             if "joke" in query:
-=======
-        while True:
-            input('')
-            query = takeCommand().lower()
-            if "who are you" in query:
-                print("I am JARVIS your favorite personal voice assistant")
-                speak("I am JARVIS your favorite personal voice assistant")
-
-
-            elif "joke" in query:
->>>>>>> 674dc6cc10368069ef0c321ea9c1fe8afb2d27f3
                 jokes()   
 
             elif "stop" in query:
@@ -165,62 +140,11 @@ if __name__ == "__main__":
                 os.startfile("C:\\Users\\ghosh\\OneDrive\\Desktop\\SOURISH.mp4")
                 pyautogui.click(1293,1058)
                 break
-<<<<<<< HEAD
 
             elif 'like'in query and 'eat' in query:
              print('i like to eat data')
              speak('i like to eat data')
 
-=======
-            elif 'hello' in query or 'hi'in query or 'hey' in query or 'sup' in query or 'heyo'in query or'whatsup' in query:
-                print("Hello!")
-                speak("Hello!")
-
-            elif 'bye' in query or 'goodbye' in query:
-                print("See you!")
-                speak("See you!")
-
-            elif 'how are you' in query:
-                print("i am doing fine, and you?")
-                speak("i am doing fine, and you?")
-
-            elif 'thank' in query or  'thanks' in query:
-                print("You're welcome!")
-                speak("You're welcome!")
-
-            elif 'your'in query and 'name' in query:
-                print('i am jarvis')
-                speak('i am jarvis')
-
-            elif 'like'in query and 'eat' in query:
-                print('i like to eat data')
-                speak('i like to eat data')
-
-            elif 'you'in query and 'bad' in query:
-                print('nope i am not')
-                speak('nope i am not')
-
-            elif 'fine'in query and 'i' in query:
-                print('great')
-                speak('great')
-
-            elif 'where'in query and'you' in query:
-                print('on internet')
-                speak('on internet')
-            
-            elif 'created'in query and'you' in query:
-                print('Ryan And Krishnendu')
-                speak('Ryan And Krishnendu')
-
-            
-            # elif 'your' in query and 'name' in query:
-            #     print("You're welcome!")
-            #     speak("You're welcome!")
-
-            # elif 'thank' or  'thanks' in query:
-            #     print("You're welcome!")
-            #     speak("You're welcome!")
->>>>>>> 674dc6cc10368069ef0c321ea9c1fe8afb2d27f3
 
             elif "open" in query:
                 web()
@@ -233,10 +157,7 @@ if __name__ == "__main__":
             elif "why"in query or "what"in query or 'who'in query or 'when' in query or 'how' in query or 'where' in query:
                 wolfrmalpha()
             
-<<<<<<< HEAD
-=======
             elif 'tower' in query:
                 speak('activating lights')
->>>>>>> 674dc6cc10368069ef0c321ea9c1fe8afb2d27f3
             else:
                 print('error404')

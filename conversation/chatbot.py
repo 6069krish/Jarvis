@@ -15,11 +15,12 @@ r= sr.Recognizer()
 lemmatizer = WordNetLemmatizer()
 
 engine = pyttsx3.init()
-with open('intents.json') as json_data:
-    intents = json.load(json_data)
 
-words = pickle.load(open('words.pkl', 'rb'))
-classes = pickle.load(open('classes.pkl', 'rb'))
+intents = json.loads(open('.vscode/intents.json').read())
+
+
+words = pickle.load(open('conversation/words.pkl', 'rb'))
+classes = pickle.load(open('conversation/classes.pkl', 'rb'))
 
 # Load the trained model
 model = load_model('chatbot_model.h5')
