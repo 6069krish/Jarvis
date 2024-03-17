@@ -10,7 +10,8 @@ import pyautogui
 import winsound
 import pyjokes
 import subprocess
-chatbot_script = 'chatbot.py'
+# chatbot_script = 'chatbot.py'
+from chatbot import *
 
 input('')
 def takeCommand():
@@ -46,11 +47,11 @@ def speak(audio):
     engine.say(audio) 
     engine.runAndWait()
 
-def handle_query_with_chatbot(user_query):
-    # Call the chatbot script and pass the user query as an argument
-    result = subprocess.run(['python', chatbot_script, user_query], capture_output=True, text=True)
-    # Return the chatbot's response
-    return result.stdout.strip()
+# def handle_query_with_chatbot(user_query):
+#     # Call the chatbot script and pass the user query as an argument
+#     result = subprocess.run(['python', chatbot_script, user_query], capture_output=True, text=True)
+#     # Return the chatbot's response
+#     return result.stdout.strip()
 
 def wiki():
     try:
@@ -105,42 +106,54 @@ if __name__ == "__main__":
         while True:
             input('')
             query = takeCommand().lower()
-            script_to_run = 'chatbot.py'
-            try:
-                if "" in query:
-                    subprocess.run(['python', script_to_run])
+            
+            # try:
+            #     # if "" in query:
+            #     #     chatbot_response = get_chatbot_response(user_input)
+            #     #     speak(chatbot_response)
+            #     # else:
+            #     #     pass
+            user_input = input("You: ")
+            chatbot_response = process_query(user_input)
+            if chatbot_response == "I'm sorry, I don't understand.":
+                pass 
+                subprocess.run(['python', 'voice_assistant.py', user_input])
+            else:
+                print("Chatbot:", chatbot_response)
+        # Speak the chatbot's response
+            speak(chatbot_response)
 
-            except:
-                if "joke" in query:
-                    jokes()   
+            # except:
+            if "joke" in query:
+                jokes()   
 
-                elif "stop" in query:
-                    speak("stopping sir")
-                    winsound.Beep(700 , 800)
-                    pyautogui.click(1915, 0)
+            elif "stop" in query:
+                speak("stopping sir")
+                winsound.Beep(700 , 800)
+                pyautogui.click(1915, 0)
                 # pyautogui.hotkey("ctrl" , "q")
                 # pyautogui.click(937,611)
 
-                elif "video" in query:
-                    os.startfile("C:\\Users\\ghosh\\OneDrive\\Desktop\\SOURISH.mp4")
-                    pyautogui.click(1293,1058)
-                    break
+            elif "video" in query:
+                os.startfile("C:\\Users\\ghosh\\OneDrive\\Desktop\\SOURISH.mp4")
+                pyautogui.click(1293,1058)
+                break
 
-                elif 'like'in query and 'eat' in query:
-                 print('i like to eat data')
-                 speak('i like to eat data')
+            elif 'like'in query and 'eat' in query:
+             print('i like to eat data')
+             speak('i like to eat data')
 
 
-                elif "open" in query:
-                    web()
+            elif "open" in query:
+                web()
            
 
-                elif "time" in query:
-                    time()
+            elif "time" in query:
+                time()
             
         
-                elif "why"in query or "what"in query or 'who'in query or 'when' in query or 'how' in query or 'where' in query:
-                    wolfrmalpha()
+            elif "why"in query or "what"in query or 'who'in query or 'when' in query or 'how' in query or 'where' in query:
+                wolfrmalpha()
             
-                else:
-                    print('error404')
+            else:
+                print('error404')
