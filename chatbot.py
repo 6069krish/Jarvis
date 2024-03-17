@@ -9,32 +9,22 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import pyttsx3
 import speech_recognition as sr
 import subprocess
-
 from keras.models import load_model
 
-# Load the WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 
 engine = pyttsx3.init()
 
-# Load intents from the JSON file
 with open('intents.json') as json_data:
     intents = json.load(json_data)
 
-# Load words and classes from pickled files
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 
-# Load the pre-trained model
 model = load_model('chatbot_model.h5')
-
-# Initialize the speech synthesizer
 engine = pyttsx3.init()
-
-# Initialize the speech recognizer
 recognizer = sr.Recognizer()
 
-# Define functions for cleaning up sentence, creating bag of words, predicting class, and getting response
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
     sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
@@ -46,7 +36,7 @@ def bag_of_words(sentence):
     for w in sentence_words:
         for i, word in enumerate(words):
             if word == w:
-                bag[i] = 1  # Corrected index here
+                bag[i] = 1 
     return np.array(bag)
 
 def predict_class(sentence):
@@ -75,22 +65,16 @@ def get_response(intents_list, intents_json):
 print("GO! BOT IS RUNNING MOTHERFUCKER")
 
 while True:
-    # Use speech recognition to listen for user input
     with sr.Microphone() as source:
         print("Listening...")
         audio = recognizer.listen(source)
 
     try:
-        # Recognize speech input
         user_input = recognizer.recognize_google(audio)
         print("User input:", user_input)
-
-        # Predict intent and get response
         ints = predict_class(user_input)
         res = get_response(ints, intents)
         print("Bot response:", res)
-
-        # Speak the bot's response
         engine.say(res)
         engine.runAndWait()
 

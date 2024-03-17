@@ -111,9 +111,6 @@ if __name__ == "__main__":
                     subprocess.run(['python', script_to_run])
 
             except:
-
-
-
                 if "joke" in query:
                     jokes()   
 
