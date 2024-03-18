@@ -34,12 +34,18 @@ def takeCommand():
      print(f"user said: {query}\n")
 
     
-    except Exception as e:
-      print("say that again please" , str(e))
-      speak("say that again please")
-      return " "
-    return query
+    # except Exception as e:
+    #   print("say that again please" , str(e))
+    #   speak("say that again please")
+    #   return " "
+    # return query
 
+    except sr.UnknownValueError:
+        print("Sorry, I didn't catch that. Could you please repeat?")
+        return ""
+    except sr.RequestError as e:
+        print("Could not request results; {0}".format(e))
+        return ""
 engine = pyttsx3.init('sapi5')
 voices= engine.getProperty('voices') 
 engine.setProperty('voice', voices[0].id)
@@ -108,24 +114,7 @@ if __name__ == "__main__":
         while True:
             input('')
             query = takeCommand().lower()
-            
-            # try:
-            #     # if "" in query:
-            #     #     chatbot_response = get_chatbot_response(user_input)
-            #     #     speak(chatbot_response)
-            #     # else:
-            #     #     pass
-            user_input = input("You: ")
-            chatbot_response = process_query(user_input)
-            if chatbot_response == "I'm sorry, I don't understand.":
-                pass 
-                subprocess.run(['python', 'voice_assistant.py', user_input])
-            else:
-                print("Chatbot:", chatbot_response)
-        # Speak the chatbot's response
-            speak(chatbot_response)
-
-            # except:
+           
             if "joke" in query:
                 jokes()   
 
@@ -142,8 +131,8 @@ if __name__ == "__main__":
                 break
 
             elif 'like'in query and 'eat' in query:
-             print('i like to eat data')
-             speak('i like to eat data')
+                print('i like to eat data')
+                speak('i like to eat data')
 
 
             elif "open" in query:
@@ -151,13 +140,12 @@ if __name__ == "__main__":
            
 
             elif "time" in query:
-                time()
+                 time()
             
         
             elif "why"in query or "what"in query or 'who'in query or 'when' in query or 'how' in query or 'where' in query:
                 wolfrmalpha()
             
-            elif 'tower' in query:
-                speak('activating lights')
+                
             else:
                 print('error404')

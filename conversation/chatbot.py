@@ -5,12 +5,16 @@ import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
 import os
+
+import pyttsx3
+import speech_recognition as sr
+
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import pyttsx3
 import speech_recognition as sr
 import subprocess
 from keras.models import load_model
-from jarvis import *
+
 r= sr.Recognizer()
 lemmatizer = WordNetLemmatizer()
 
@@ -50,6 +54,10 @@ def predict_class(sentence):
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
     return return_list
 
+def speak(audio):
+    engine.say(audio) 
+    engine.runAndWait()
+
 def get_response(intents_list, intents_json):
     tag = intents_list[0]['intent']
     list_of_intents = intents_json['intents']
@@ -58,22 +66,13 @@ def get_response(intents_list, intents_json):
             responses = intent['responses']
             result = random.choice(responses)
             break
-    else:
-        result = "I'm sorry, I don't understand."
     return result
-
-def process_query(user_query):
-    # Process user's query and return response
-    ints = predict_class(user_query)
-    res = get_response(ints, intents)
-    return res
 
 def get_chatbot_response(user_input):
     # Get response from chatbot
     ints = predict_class(user_input)
     res = get_response(ints, intents)
     return res
-
 print("GO! BOT IS RUNNING MOTHERFUCKER")
 
 while True:
@@ -81,21 +80,12 @@ while True:
         print("Listening...")
         audio = r.listen(source)
 
-    # try:
         user_input = r.recognize_google(audio)
         print("User input:", user_input)
         ints = predict_class(user_input)
         res = get_response(ints, intents)
         print("Bot response:", res)
+        speak(res)
         chatbot_response = get_chatbot_response(user_input)
-    # if chatbot_response == "I'm sorry, I don't understand.":
-    #     subprocess.run(['python', 'jarvis.py'])
-    # else:
-    #     engine.say(chatbot_response)
-    #     engine.runAndWait()
-
-    # except:
-    #     script_to_run = 'jarvis.py'
-    #     subprocess.run(['python', script_to_run])
 
 
