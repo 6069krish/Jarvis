@@ -9,43 +9,43 @@ import datetime
 import wikipedia
 import pyautogui
 import winsound
-import pyjokes
 import subprocess
-# chatbot_script = 'chatbot.py'
-from conversation.chatbot import *
-
+import pyjokes
+os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') 
 input('')
 def takeCommand():
-    r = sr.Recognizer() 
+    recognizer = sr.Recognizer()
 
     with sr.Microphone() as source:
         print("Listening.....")
         winsound.Beep(500 , 600)
-        r.pause_threshold = 1
-        r.adjust_for_ambient_noise(source)
-        audio = r.listen(source)
-        
+        recognizer.pause_threshold = 1
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
 
     try:
      print("Recognizing....")
 
      winsound.Beep(300 , 400)
-     query = r.recognize_google(audio, language='en-in')
+     query = recognizer.recognize_google(audio, language='en-in')
      print(f"user said: {query}\n")
+     
 
     
-    # except Exception as e:
-    #   print("say that again please" , str(e))
-    #   speak("say that again please")
-    #   return " "
-    # return query
+    except Exception as e:
+      print("say that again please" , str(e))
+      speak("say that again please")
+      return " "
+    return query
 
-    except sr.UnknownValueError:
-        print("Sorry, I didn't catch that. Could you please repeat?")
-        return ""
-    except sr.RequestError as e:
-        print("Could not request results; {0}".format(e))
-        return ""
+    # except sr.UnknownValueError:
+    #     print("Sorry, I didn't catch that. Could you please repeat?")
+    #     return query  # Return an empty string in case of recognition failure
+
+    # except sr.RequestError as e:
+    #     print("Could not request results; {0}".format(e))
+    #     return query
+    
 engine = pyttsx3.init('sapi5')
 voices= engine.getProperty('voices') 
 engine.setProperty('voice', voices[0].id)
@@ -53,12 +53,6 @@ engine.setProperty('voice', voices[0].id)
 def speak(audio):
     engine.say(audio) 
     engine.runAndWait()
-
-# def handle_query_with_chatbot(user_query):
-#     # Call the chatbot script and pass the user query as an argument
-#     result = subprocess.run(['python', chatbot_script, user_query], capture_output=True, text=True)
-#     # Return the chatbot's response
-#     return result.stdout.strip()
 
 
 def wiki():
@@ -81,7 +75,7 @@ def jokes():
 def wolfrmalpha(): 
     try: 
 
-        client = wolframalpha.Client("your_client_id")
+        client = wolframalpha.Client("7G6TQL-KK3HPEY2UA")
         res = client.query(query)
         output = next(res.results).text
         print(output)
@@ -102,7 +96,7 @@ def web():
             re.search('open' , query)
             domain = query.split(' ')[-1]
             speak(f'Alright sir !! Opening {domain}')
-            webbrowser.open(f"{domain}.com")
+            webbrowser.open(f"https://{domain}.com")
 
         
 
@@ -134,6 +128,8 @@ if __name__ == "__main__":
                 print('i like to eat data')
                 speak('i like to eat data')
 
+            elif "conversation" in query and "talk" in query and "chatbot" in query:
+                subprocess.run(["python", "chatbot.py"], capture_output=True, text=True)
 
             elif "open" in query:
                 web()
@@ -145,7 +141,4 @@ if __name__ == "__main__":
         
             elif "why"in query or "what"in query or 'who'in query or 'when' in query or 'how' in query or 'where' in query:
                 wolfrmalpha()
-            
-                
-            else:
-                print('error404')
+

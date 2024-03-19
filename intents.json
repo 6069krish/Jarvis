@@ -1,9 +1,16 @@
-{ 
+{
   "questions": [
     {
       "question": " hello",
       "answer": " hey"
+    },
+    {
+      "question": "how r u",
+      "answer": "fine , and you?"
+    },
+    {
+      "question": "where are you",
+      "answer": "i live on the internet"
     }
   ]
 }
-    

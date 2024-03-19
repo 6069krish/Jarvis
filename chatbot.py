@@ -4,11 +4,18 @@ import os
 from difflib import get_close_matches
 import pyttsx3
 import speech_recognition as sr
-
+import pyttsx3
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import pyttsx3
 import speech_recognition as sr
 
+engine = pyttsx3.init('sapi5')
+voices= engine.getProperty('voices') 
+engine.setProperty('voice', voices[0].id)
+
+def speak(audio):
+    engine.say(audio) 
+    engine.runAndWait()
 
 def load_knowledge_base(file_path: str) -> dict:
     with open(file_path , 'r') as file:
@@ -57,12 +64,13 @@ def chat_bot():
                 engine.say(answer)
                 engine.runAndWait()
             else:
-                print('Bot: I don\'t know. Please teach me.')
+                print("Bot: I don't know. Please teach me.")
+                speak("Bot: I don't know. Please teach me.")
                 new_answer = input('Type the answer or "skip" to skip: ')
 
                 if new_answer.lower() != 'skip':
                     knowledge_base["questions"].append({"question": query, "answer": new_answer})
-                    save_knowledge_base('.vscode/intents.json', knowledge_base)
+                    save_knowledge_base('intents.json', knowledge_base)
                     print('Bot: Thank you, I have learned.')
                     engine.say('Thank you, I have learned.')
                     engine.runAndWait()
