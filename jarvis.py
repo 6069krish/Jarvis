@@ -11,7 +11,7 @@ import pyautogui
 import winsound
 import subprocess
 import pyjokes
-os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') 
+from googletrans import Translator
 input('')
 def takeCommand():
     recognizer = sr.Recognizer()
@@ -71,6 +71,19 @@ def jokes():
     print(joke)
     speak(joke)
 
+def translate():
+    translator = Translator()
+    
+    speak("Please enter the text to translate.")
+    text_to_translate = input("You: ")
+    
+    speak("Please enter the language code for translation. For example, 'fr' for French.")
+    target_language = input("You: ")
+
+    translation = translator.translate(text_to_translate, dest=target_language)
+    translated_text = translation.text
+
+    speak("Translated text is: " + translated_text)
 
 def wolfrmalpha(): 
     try: 
@@ -124,6 +137,9 @@ if __name__ == "__main__":
                 pyautogui.click(1293,1058)
                 break
 
+            elif "translate" in query:
+                translate()
+            
             elif 'like'in query and 'eat' in query:
                 print('i like to eat data')
                 speak('i like to eat data')
@@ -141,4 +157,9 @@ if __name__ == "__main__":
         
             elif "why"in query or "what"in query or 'who'in query or 'when' in query or 'how' in query or 'where' in query:
                 wolfrmalpha()
+
+            elif "talk" in query or "conversation" in query:
+                pyautogui.click(590 , 57)
+                pyautogui.click(1824, 60)
+                break
 

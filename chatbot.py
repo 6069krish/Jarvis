@@ -8,6 +8,7 @@ import pyttsx3
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import pyttsx3
 import speech_recognition as sr
+from jarvis import *
 
 engine = pyttsx3.init('sapi5')
 voices= engine.getProperty('voices') 
@@ -81,4 +82,11 @@ def chat_bot():
             print(f"Could not request results from Google Speech Recognition service: {e}")
 
 if __name__ == '__main__' :
-    chat_bot()
+    query = takeCommand()
+    while True:
+        if "stop" not in query:
+            chat_bot()
+
+        else:
+            if "stop" in query:
+                subprocess.run(['python' , 'jarvis.py'])
