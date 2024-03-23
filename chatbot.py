@@ -82,11 +82,12 @@ def chat_bot():
             print(f"Could not request results from Google Speech Recognition service: {e}")
 
 if __name__ == '__main__' :
+    speak("Jarvis is now in conversational mode , tell exit to exit from conversational mode")
+    # print("Jarvis is now in conversational mode , tell exit to exit from conversational mode")
     query = takeCommand()
     while True:
-        if "stop" not in query:
-            chat_bot()
-
+        if "exit" in query:
+            subprocess.run(['python', 'jarvis.py'])
+            break
         else:
-            if "stop" in query:
-                subprocess.run(['python' , 'jarvis.py'])
+            chat_bot()

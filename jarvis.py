@@ -159,7 +159,6 @@ if __name__ == "__main__":
                 wolfrmalpha()
 
             elif "talk" in query or "conversation" in query:
-                pyautogui.click(590 , 57)
-                pyautogui.click(1824, 60)
+                subprocess.run(['python' , 'chatbot.py'])
                 break
 

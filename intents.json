@@ -11,6 +11,38 @@
     {
       "question": "where are you",
       "answer": "i live on the internet"
+    },
+    {
+      "question": "hello",
+      "answer": "Hey there!"
+    },
+    {
+      "question": "how are you",
+      "answer": "I'm doing well, thank you for asking. How about you?"
+    },
+    {
+      "question": "where are you",
+      "answer": "I exist in the realm of digital space, here to assist you."
+    },
+    {
+      "question": "what can you do",
+      "answer": "I can provide information, tell jokes, open web pages, translate text, and more. Just ask!"
+    },
+    {
+      "question": "who created you",
+      "answer": "I was created by a team of developers at OpenAI."
+    },
+    {
+      "question": "do you dream",
+      "answer": "Dreams are an intriguing concept, but as an AI, I don't experience them like humans do."
+    },
+    {
+      "question": "tell me a joke",
+      "answer": "Why don't scientists trust atoms? Because they make up everything!"
+    },
+    {
+      "question": "exit",
+      "answer": "C:/Users/ghosh/AppData/Local/Microsoft/WindowsApps/python3.11.exe"
     }
   ]
 }
